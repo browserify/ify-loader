@@ -1,0 +1,47 @@
+{
+  "name": "ify-loader",
+  "version": "1.0.0",
+  "description": "Webpack loader to handle browserify transforms as intended",
+  "main": "index.js",
+  "license": "MIT",
+  "author": {
+    "name": "Hugh Kennedy",
+    "email": "hughskennedy@gmail.com",
+    "url": "https://github.com/hughsk"
+  },
+  "dependencies": {
+    "bl": "^1.0.0",
+    "findup": "^0.1.5",
+    "from2-array": "0.0.4",
+    "map-limit": "0.0.1",
+    "multipipe": "^0.3.0",
+    "read-package-json": "^2.0.2",
+    "resolve": "^1.1.6"
+  },
+  "devDependencies": {
+    "brfs": "^1.4.2",
+    "npm-which": "^2.0.0",
+    "standard": "^5.4.1",
+    "tap-spec": "^4.1.1",
+    "tape": "^4.4.0",
+    "webpack": "^1.12.9"
+  },
+  "scripts": {
+    "test": "node test.js | tspec",
+    "posttest": "standard"
+  },
+  "keywords": [
+    "ify",
+    "browserify",
+    "loader",
+    "webpack"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/hughsk/ify-loader.git"
+  },
+  "homepage": "https://github.com/hughsk/ify-loader",
+  "bugs": {
+    "url": "https://github.com/hughsk/ify-loader/issues"
+  }
+}
