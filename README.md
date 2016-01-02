@@ -35,7 +35,7 @@ When given the choice, I lean more in favour of [browserify](http://browserify.o
 
 Webpack provides you with a "global" configuration where you specify how your project and its dependencies are transformed in a single place. Browserify, however, scopes transforms to the current package to avoid conflicts between different dependencies' sources using the  [`browserify.transform` property](https://github.com/substack/node-browserify#browserifytransform) in `package.json`.
 
-There are pros and cons to both approaches — Webpack gives you more control, at the expense of having to configure each transform used in your dependency tree. Unlike [transform-loader](https://github.com/webpack/transform-loader), *ify-loader* will determine which transforms to apply to your dependencies for you, making the process a lot more bearable in complex projects!
+There are pros and cons to both approaches — Webpack gives you more control, at the expense of having to configure each transform used in your dependency tree. Unlike [transform-loader](https://github.com/webpack/transform-loader), *ify-loader* will automatically determine which browserify transforms to apply to your dependencies for you the same way that browserify itself does, making the process a lot more bearable in complex projects!
 
 ## See Also
 
