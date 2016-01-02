@@ -30,7 +30,7 @@ function loader (source) {
 
       const pkgTransforms = [].concat(
         json.browserify && json.browserify.transform
-      )
+      ).filter(Boolean)
 
       map(pkgTransforms, 10, function (transform, next) {
         transform = Array.isArray(transform) ? transform : [transform]
