@@ -12,7 +12,7 @@ Install the loader using [npm](https://npmjs.com/):
 npm install --save ify-loader
 ```
 
-You can then update your `webpack.config.js` in a similar fashion to the following to add browserify transform support to your project:
+You can then update your `webpack.config.js` in a similar fashion to the following to add browserify transform support to your project's dependencies:
 
 ``` javascript
 module.exports = {
@@ -24,6 +24,42 @@ module.exports = {
         test: /node_modules/,
         loader: 'ify'
       }
+    ]
+  }
+}
+```
+
+### Using transforms in your project
+
+Note that you're also free to apply this loader to files in your own project. Include the following in your project's `webpack.config.js`:
+
+``` javascript
+module.exports = {
+  module: {
+    postLoaders: [
+      // support local package.json browserify config
+      {
+        test: /\.js$/,
+        loader: 'ify'
+      }
+    ]
+  }
+}
+```
+
+Any browserify transforms you include in `package.json` will get picked up and applied this way:
+
+``` json
+{
+  "name": "my-project",
+  "dependencies": {
+    "glslify": "5.0.0",
+    "brfs": "1.4.2"
+  },
+  "browserify": {
+    "transform": [
+      "glslify",
+      "brfs"
     ]
   }
 }
