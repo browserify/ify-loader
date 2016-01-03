@@ -7,9 +7,9 @@ const vm = require('vm')
 
 test('ify-loader', function (t) {
   const wpack = which.sync('webpack', { cwd: __dirname })
-  const input = path.join(__dirname, 'fixture', 'index.js')
-  const output = path.join(__dirname, 'fixture', 'bundle.js')
-  const pkg = path.join(__dirname, 'fixture', 'package.json')
+  const input = path.join(__dirname, 'fixtures', 'basic', 'index.js')
+  const output = path.join(__dirname, 'fixtures', 'basic', 'bundle.js')
+  const pkg = path.join(__dirname, 'fixtures', 'basic', 'package.json')
 
   t.plan(1)
 
@@ -36,5 +36,27 @@ test('ify-loader', function (t) {
         }
       }
     })
+  })
+})
+
+test('error handling', function (t) {
+  const wpack = which.sync('webpack', { cwd: __dirname })
+  const input = path.join(__dirname, 'fixtures', 'errors', 'index.js')
+  const output = path.join(__dirname, 'fixtures', 'errors', 'bundle.js')
+
+  t.plan(1)
+
+  spawn(wpack, [
+    input,
+    output,
+    '--module-bind', 'js=' + __dirname
+  ], {
+    stdio: ['pipe', 'pipe', 2]
+  }).once('exit', function (code) {
+    try {
+      fs.unlinkSync(output)
+    } catch (e) {}
+
+    t.equal(code, 0, 'exit code zero (they should probably fix that...)')
   })
 })

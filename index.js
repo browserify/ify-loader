@@ -69,9 +69,9 @@ function loader (source) {
         transforms = []
           .concat(from2([source]))
           .concat(transforms)
-          .concat(bl(done))
 
         multipipe.apply(this, transforms)
+          .pipe(bl(done))
       })
     })
   }
