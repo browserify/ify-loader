@@ -39,6 +39,33 @@ test('ify-loader', function (t) {
   })
 })
 
+test('relative transforms', function (t) {
+  const wpack = which.sync('webpack', { cwd: __dirname })
+  const input = path.join(__dirname, 'fixtures', 'relative', 'index.js')
+  const output = path.join(__dirname, 'fixtures', 'relative', 'bundle.js')
+
+  t.plan(2)
+
+  try {
+    fs.unlinkSync(output)
+  } catch (e) {}
+
+  spawn(wpack, [
+    input,
+    output,
+    '--module-bind', 'js=' + __dirname
+  ], {
+    stdio: ['pipe', 'pipe', 2]
+  }).once('exit', function (code) {
+    t.doesNotThrow(function () {
+      fs.statSync(output)
+    }, 'bundle.js was created')
+    fs.unlinkSync(output)
+
+    t.ok(!code, 'exit code was 0')
+  })
+})
+
 test('error handling', function (t) {
   const wpack = which.sync('webpack', { cwd: __dirname })
   const input = path.join(__dirname, 'fixtures', 'errors', 'index.js')

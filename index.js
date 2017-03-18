@@ -43,7 +43,7 @@ function loader (source) {
         }
 
         resolve(name, {
-          basedir: dirname
+          basedir: pkgDir
         }, function (err, name) {
           if (err) return next(err)
 
