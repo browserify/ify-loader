@@ -84,6 +84,6 @@ test('error handling', function (t) {
       fs.unlinkSync(output)
     } catch (e) {}
 
-    t.equal(code, 0, 'exit code zero (they should probably fix that...)')
+    t.equal(code, 2, 'exit code was 2')
   })
 })
