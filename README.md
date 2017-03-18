@@ -22,7 +22,7 @@ module.exports = {
       // and not any of the source files in your project:
       {
         test: /node_modules/,
-        loader: 'ify'
+        loader: 'ify-loader'
       }
     ]
   }
@@ -36,11 +36,12 @@ Note that you're also free to apply this loader to files in your own project. In
 ``` javascript
 module.exports = {
   module: {
-    postLoaders: [
+    loaders: [
       // support local package.json browserify config
       {
         test: /\.js$/,
-        loader: 'ify'
+        loader: 'ify-loader',
+        enforce: 'post'
       }
     ]
   }
