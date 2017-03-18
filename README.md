@@ -2,7 +2,7 @@
 
 [![experimental](http://badges.github.io/stability-badges/dist/experimental.svg)](http://github.com/badges/stability-badges)
 
-[Webpack](https://github.com/webpack/webpack) loader to handle [browserify transforms]() as intended.
+[Webpack](https://github.com/webpack/webpack) loader to handle [browserify transforms](https://github.com/substack/browserify-handbook#browserifytransform-field) as intended.
 
 ## Usage
 
