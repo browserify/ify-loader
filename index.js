@@ -1,11 +1,8 @@
 const readJSON = require('read-package-json')
-const multipipe = require('multipipe')
-const from2 = require('from2-array')
 const resolve = require('resolve')
 const map = require('map-limit')
 const findup = require('findup')
 const path = require('path')
-const bl = require('bl')
 
 module.exports = loader
 
@@ -61,17 +58,10 @@ function loader (source) {
         if (err) return done(err)
 
         transforms.forEach(function (tr) {
-          tr.on('file', function (file) {
-            self.addDependency(file)
-          })
+          self.addDependency(tr)
         })
 
-        transforms = []
-          .concat(from2([source]))
-          .concat(transforms)
-
-        multipipe.apply(this, transforms)
-          .pipe(bl(done))
+        done(null, transforms.join(''))
       })
     })
   }
