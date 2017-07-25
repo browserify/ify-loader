@@ -5,7 +5,6 @@ const path = require('path')
 const fs = require('fs')
 const vm = require('vm')
 
-/*
 test('ify-loader', function (t) {
   const wpack = which.sync('webpack', { cwd: __dirname })
   const input = path.join(__dirname, 'fixtures', 'basic', 'index.js')
@@ -89,7 +88,7 @@ test('error handling', function (t) {
     t.equal(code, 2, 'exit code was 2')
   })
 })
-*/
+
 test('glsl-transform', function (t) {
   const wpack = which.sync('webpack', { cwd: __dirname })
   const input = path.join(__dirname, 'fixtures', 'glsl', 'index.js')
