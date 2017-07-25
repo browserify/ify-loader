@@ -93,7 +93,7 @@ test('glsl-transform', function (t) {
   const wpack = which.sync('webpack', { cwd: __dirname })
   const input = path.join(__dirname, 'fixtures', 'glsl', 'index.js')
   const output = path.join(__dirname, 'fixtures', 'glsl', 'bundle.js')
-  const pkg = path.join(__dirname, 'fixtures', 'glsl', 'package.json')
+  const pkg = path.join(__dirname, 'fixtures', 'glsl', 'output.js')
 
   t.plan(1)
 
