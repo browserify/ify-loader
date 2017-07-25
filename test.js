@@ -33,7 +33,8 @@ test('ify-loader', function (t) {
         log: function (src) {
           const expected = fs.readFileSync(pkg, { encoding: 'utf8' })
           t.equal(src, expected, 'processed brfs from package.json')
-        }
+        },
+        error: console.error
       }
     })
   })
@@ -87,3 +88,39 @@ test('error handling', function (t) {
     t.equal(code, 2, 'exit code was 2')
   })
 })
+
+test('glsl-transform', function (t) {
+  const wpack = which.sync('webpack', { cwd: __dirname })
+  const input = path.join(__dirname, 'fixtures', 'glsl', 'index.js')
+  const output = path.join(__dirname, 'fixtures', 'glsl', 'bundle.js')
+  const pkg = path.join(__dirname, 'fixtures', 'glsl', 'output.js')
+
+  t.plan(1)
+
+  try {
+    fs.unlinkSync(output)
+  } catch (e) {}
+
+  spawn(wpack, [
+    input,
+    output,
+    '--module-bind', 'js=' + __dirname
+  ], {
+    stdio: ['pipe', 'pipe', 2]
+  }).once('exit', function () {
+    const result = fs.readFileSync(output, { encoding: 'utf8' })
+
+    fs.unlinkSync(output)
+
+    vm.runInNewContext(result, {
+      console: {
+        log: function (src) {
+          const expected = fs.readFileSync(pkg, { encoding: 'utf8' })
+          t.equal(src, expected, 'processed brfs from package.json')
+        },
+        error: console.error
+      }
+    })
+  })
+})
+
