@@ -1,3 +1,3 @@
 const fs = require('fs')
-
-console.log(fs.readFileSync(__dirname + '/package.json', 'utf8'))
+const glsl = require('glslify');
+const shader = glsl(fs.readFileSync(__dirname + '/shader.glsl', 'utf8'))
