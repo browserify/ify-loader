@@ -5,6 +5,7 @@ const path = require('path')
 const fs = require('fs')
 const vm = require('vm')
 
+/*
 test('ify-loader', function (t) {
   const wpack = which.sync('webpack', { cwd: __dirname })
   const input = path.join(__dirname, 'fixtures', 'basic', 'index.js')
@@ -88,12 +89,14 @@ test('error handling', function (t) {
     t.equal(code, 2, 'exit code was 2')
   })
 })
+*/
 
 test('glsl-transform', function (t) {
   const wpack = which.sync('webpack', { cwd: __dirname })
   const input = path.join(__dirname, 'fixtures', 'glsl', 'index.js')
   const output = path.join(__dirname, 'fixtures', 'glsl', 'bundle.js')
-  const pkg = path.join(__dirname, 'fixtures', 'glsl', 'output.js')
+  const config = path.join(__dirname, 'fixtures', 'glsl', 'webpack.config.js')
+  const fixture = path.join(__dirname, 'fixtures', 'glsl', 'output.txt')
 
   t.plan(1)
 
@@ -103,9 +106,11 @@ test('glsl-transform', function (t) {
 
   spawn(wpack, [
     input,
-    output,
-    '--module-bind', 'js=' + __dirname
+    '--module-bind', 'js=' + __dirname,
+    '--config',
+    config
   ], {
+    cwd: path.join(__dirname, 'fixtures', 'glsl'),
     stdio: ['pipe', 'pipe', 2]
   }).once('exit', function () {
     const result = fs.readFileSync(output, { encoding: 'utf8' })
@@ -114,9 +119,9 @@ test('glsl-transform', function (t) {
 
     vm.runInNewContext(result, {
       console: {
-        log: function (src) {
-          const expected = fs.readFileSync(pkg, { encoding: 'utf8' })
-          t.equal(src, expected, 'processed brfs from package.json')
+        log: function (shader) {
+          const expected = fs.readFileSync(fixture, { encoding: 'utf8' })
+          t.equal(shader + '\n', expected, 'processed brfs from package.json')
         },
         error: console.error
       }

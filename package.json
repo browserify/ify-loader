@@ -20,6 +20,7 @@
   },
   "devDependencies": {
     "brfs": "^1.4.2",
+    "from2-string": "^1.1.0",
     "glslify": "^6.1.0",
     "npm-which": "^2.0.0",
     "regl": "^1.3.0",

@@ -1,6 +1,15 @@
+const path = require('path')
+
 module.exports = {
-  loaders: [
-    test: /\.(glsl|vert|v|frag|f)$/,
-    loader: 'ify-loader'
-  ]
+  entry: './index.js',
+  output: {
+    path: __dirname,
+    filename: 'bundle.js'
+  },
+  module: {
+    rules: [{
+      test: /\.js/,
+      use: path.join(__dirname, '..', '..')
+    }]
+  }
 }

@@ -1,3 +1,9 @@
-const fs = require('fs')
 const glsl = require('glslify')
-glsl(fs.readFileSync(__dirname + '/shader.glsl', 'utf8'))
+
+console.log(glsl`
+precision mediump float;
+#pragma glslify: ones = require(./ones)
+void main () {
+  gl_FragColor = ones();
+}
+`)
