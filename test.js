@@ -91,7 +91,6 @@ test('error handling', function (t) {
 
 test('glsl-transform', function (t) {
   const wpack = which.sync('webpack', { cwd: __dirname })
-  const input = path.join(__dirname, 'fixtures', 'glsl', 'index.js')
   const output = path.join(__dirname, 'fixtures', 'glsl', 'bundle.js')
   const config = path.join(__dirname, 'fixtures', 'glsl', 'webpack.config.js')
   const fixture = path.join(__dirname, 'fixtures', 'glsl', 'output.txt')
@@ -103,7 +102,6 @@ test('glsl-transform', function (t) {
   } catch (e) {}
 
   spawn(wpack, [
-    input,
     '--module-bind', 'js=' + __dirname,
     '--config',
     config
