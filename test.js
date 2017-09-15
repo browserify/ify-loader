@@ -33,8 +33,7 @@ test('ify-loader', function (t) {
         log: function (src) {
           const expected = fs.readFileSync(pkg, { encoding: 'utf8' })
           t.equal(src, expected, 'processed brfs from package.json')
-        },
-        error: console.error
+        }
       }
     })
   })
@@ -118,8 +117,7 @@ test('glsl-transform', function (t) {
         log: function (shader) {
           const expected = fs.readFileSync(fixture, { encoding: 'utf8' })
           t.equal(shader + '\n', expected, 'processed brfs from package.json')
-        },
-        error: console.error
+        }
       }
     })
   })
