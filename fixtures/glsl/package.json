@@ -6,7 +6,6 @@
   },
   "browserify": {
     "transform": [
-      "brfs",
       "glslify"
     ]
   }
