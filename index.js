@@ -37,6 +37,7 @@ function loader (source) {
 
         const name = transform[0]
         const opts = transform[1] || {}
+        opts._flags = opts._flags || []
 
         if (typeof name === 'function') {
           return next(null, name(filename, opts))

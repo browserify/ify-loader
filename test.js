@@ -87,3 +87,39 @@ test('error handling', function (t) {
     t.equal(code, 2, 'exit code was 2')
   })
 })
+
+test('glsl-transform', function (t) {
+  const wpack = which.sync('webpack', { cwd: __dirname })
+  const output = path.join(__dirname, 'fixtures', 'glsl', 'bundle.js')
+  const config = path.join(__dirname, 'fixtures', 'glsl', 'webpack.config.js')
+  const fixture = path.join(__dirname, 'fixtures', 'glsl', 'output.txt')
+
+  t.plan(1)
+
+  try {
+    fs.unlinkSync(output)
+  } catch (e) {}
+
+  spawn(wpack, [
+    '--module-bind', 'js=' + __dirname,
+    '--config',
+    config
+  ], {
+    cwd: path.join(__dirname, 'fixtures', 'glsl'),
+    stdio: ['pipe', 'pipe', 2]
+  }).once('exit', function () {
+    const result = fs.readFileSync(output, { encoding: 'utf8' })
+
+    fs.unlinkSync(output)
+
+    vm.runInNewContext(result, {
+      console: {
+        log: function (shader) {
+          const expected = fs.readFileSync(fixture, { encoding: 'utf8' })
+          t.equal(shader + '\n', expected, 'processed brfs from package.json')
+        }
+      }
+    })
+  })
+})
+
