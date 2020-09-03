@@ -10,7 +10,7 @@
     "url": "https://github.com/hughsk"
   },
   "dependencies": {
-    "bl": "^1.0.0",
+    "bl": "^4.0.3",
     "findup": "^0.1.5",
     "from2-array": "0.0.4",
     "map-limit": "0.0.1",
