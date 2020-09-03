@@ -1,0 +1,27 @@
+name: nodejs
+on: [pull_request, push]
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        node-version: [10, 12, 14]
+        os: [ubuntu-latest, windows-latest, macOS-latest]
+    steps:
+    - uses: actions/checkout@v2.3.2
+    - name: Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2.1.1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Update npm
+      run: |
+        npm install -g npm
+        npm --version
+    - name: Install dependencies
+      uses: bahmutov/npm-install@v1.4.3
+      with:
+        useLockFile: false
+    - name: npm ls
+      run: npm ls
+    - name: Test
+      run: npm test
