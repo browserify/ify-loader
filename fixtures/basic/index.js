@@ -1,3 +1,4 @@
 const fs = require('fs')
+const path = require('path')
 
-console.log(fs.readFileSync(__dirname + '/package.json', 'utf8'))
+console.log(fs.readFileSync(path.join(__dirname, 'package.json'), 'utf8'))

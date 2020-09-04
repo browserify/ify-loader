@@ -20,7 +20,7 @@ test('ify-loader', function (t) {
   spawn(wpack, [
     input,
     output,
-    '--module-bind', 'js=' + __dirname
+    '--module-bind', 'js=' + path.resolve(__dirname)
   ], {
     stdio: ['pipe', 'pipe', 2]
   }).once('exit', function () {
@@ -53,7 +53,7 @@ test('relative transforms', function (t) {
   spawn(wpack, [
     input,
     output,
-    '--module-bind', 'js=' + __dirname
+    '--module-bind', 'js=' + path.resolve(__dirname)
   ], {
     stdio: ['pipe', 'pipe', 2]
   }).once('exit', function (code) {
@@ -76,7 +76,7 @@ test('error handling', function (t) {
   spawn(wpack, [
     input,
     output,
-    '--module-bind', 'js=' + __dirname
+    '--module-bind', 'js=' + path.resolve(__dirname)
   ], {
     stdio: ['pipe', 'pipe', 2]
   }).once('exit', function (code) {
@@ -101,7 +101,7 @@ test('glsl-transform', function (t) {
   } catch (e) {}
 
   spawn(wpack, [
-    '--module-bind', 'js=' + __dirname,
+    '--module-bind', 'js=' + path.resolve(__dirname),
     '--config',
     config
   ], {
@@ -122,4 +122,3 @@ test('glsl-transform', function (t) {
     })
   })
 })
-
