@@ -1,4 +1,3 @@
-const readJSON = require('read-package-json')
 const multipipe = require('multipipe')
 const from2 = require('from2-array')
 const resolve = require('resolve')
@@ -6,6 +5,17 @@ const map = require('map-limit')
 const findup = require('findup')
 const path = require('path')
 const bl = require('bl')
+
+function readJSON (jsonFile, cb) {
+  if (typeof cb !== 'function') return
+
+  try {
+    const jsonContent = require(jsonFile)
+    cb(null, jsonContent)
+  } catch (err) {
+    cb(err)
+  }
+}
 
 module.exports = loader
 
